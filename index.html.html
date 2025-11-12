@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>⭐ STAR CHITS ⭐</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header>
+    <h1>⭐ STAR CHITS ⭐</h1>
+    <p>Management Dashboard</p>
+  </header>
+
+  <nav>
+    <button onclick="showPage('home')">Home</button>
+    <button onclick="showPage('monthly')">Monthly</button>
+    <button onclick="showPage('clientLogin')">Client Login</button>
+    <button onclick="showPage('loans')">Loans</button>
+    <button onclick="showPage('deposits')">Deposits</button>
+    <button onclick="showPage('payments')">Payments</button>
+    <button onclick="showPage('expenses')">Expenses</button>
+    <button onclick="showPage('profitLoss')">Profit & Loss</button>
+  </nav>
+
+  <!-- 🏠 HOME -->
+  <section id="home" style="display:block;">
+    <h2>Welcome to STAR CHITS Dashboard</h2>
+    <p class="center-text">Select a section above to get started.</p>
+  </section>
+
+  <!-- 📅 MONTHLY -->
+  <section id="monthly" class="hidden">
+    <h2>Monthly Collection</h2>
+    <div class="filter-row">
+      <label>Month:</label>
+      <select id="monthInput">
+        <option>January</option><option>February</option><option>March</option>
+        <option>April</option><option>May</option><option>June</option>
+        <option>July</option><option>August</option><option>September</option>
+        <option>October</option><option>November</option><option>December</option>
+      </select>
+      <label>Year:</label>
+      <input type="number" id="yearInput" value="2025" min="2000" max="2050"/>
+      <button class="btn-blue">Search</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>S.No</th><th>A/C No.</th><th>Name</th>
+          <th>Installment No.</th><th>Balance</th><th>Phone No.</th>
+        </tr>
+      </thead>
+      <tbody id="monthlyTableBody"></tbody>
+    </table>
+  </section>
+
+  <!-- 👤 CLIENT LOGIN -->
+  <section id="clientLogin" class="hidden">
+    <h2>Client Login</h2>
+    <div class="filter-row">
+      <input type="text" placeholder="Enter Name or ID" />
+      <button class="btn-blue">Login</button>
+    </div>
+  </section>
+
+  <!-- 💰 LOANS -->
+  <section id="loans" class="hidden">
+    <h2>Loans</h2>
+    <p class="center-text">Loan details module coming soon...</p>
+  </section>
+
+  <!-- 🏦 DEPOSITS -->
+  <section id="deposits" class="hidden">
+    <h2>Deposits</h2>
+
+    <div id="deposit-list" class="center-text">
+      <p>Select a depositor:</p>
+      <div><b>Standard Traders</b> — <button onclick="openReferencePage('Standard Traders','9966696366')">9966696366</button></div>
+      <div><b>Elite Agencies</b> — <button onclick="openReferencePage('Elite Agencies','9876543210')">9876543210</button></div>
+    </div>
+
+    <div id="reference-page" style="display:none;" class="center-text">
+      <h3 id="ref-title"></h3>
+      <p>Click reference number:</p>
+      <button id="ref-number" onclick="openTraderDetails()">JL24C20-6</button><br><br>
+      <button class="btn-blue" onclick="goBackToDeposits()">⬅ Back</button>
+    </div>
+
+    <div id="details-page" style="display:none;">
+      <div class="details-container">
+        <button class="btn-red top-right" onclick="goBackToReference()">⬅ Back</button>
+        <h2>Depositor Details</h2>
+
+        <table>
+          <tr><th>NAME</th><td id="td-name"></td></tr>
+          <tr><th>PHONE</th><td id="td-phone"></td></tr>
+          <tr><th>REFERENCE</th><td id="td-ref"></td></tr>
+        </table>
+
+        <div class="filter-row">
+          <label>Start Month:</label>
+          <select id="startMonth">
+            <option>JAN</option><option>FEB</option><option>MAR</option><option>APR</option>
+            <option>MAY</option><option>JUN</option><option>JUL</option><option>AUG</option>
+            <option>SEP</option><option>OCT</option><option>NOV</option><option>DEC</option>
+          </select>
+
+          <label>Year:</label>
+          <input type="number" id="startYear" value="2024" min="2020" max="2035" />
+
+          <label>Tenure (months):</label>
+          <input type="number" id="tenureMonths" value="12" min="1" max="60" />
+
+          <label>Interest (%):</label>
+          <input type="number" id="interestRate" value="1" step="0.1" />
+
+          <button class="btn-blue" onclick="generateDepositTable()">Generate</button>
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn-blue" onclick="printDeposit()">🖨️ Print</button>
+          <button class="btn-blue" onclick="downloadDeposit()">⬇️ Download</button>
+        </div>
+
+        <table id="depositTable">
+          <tr>
+            <th>S.No.</th><th>MONTH</th><th>DEPOSIT AMT</th>
+            <th>OLD DEPOSIT BAL</th><th>TOTAL DEPOSIT</th>
+            <th>INTEREST</th><th>OLD INT BAL</th><th>TOTAL INTEREST</th><th>TOTAL AMOUNT</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 💵 OTHER SECTIONS -->
+  <section id="payments" class="hidden"><h2>Payments</h2></section>
+  <section id="expenses" class="hidden"><h2>Expenses</h2></section>
+  <section id="profitLoss" class="hidden"><h2>Profit & Loss</h2></section>
+
+  <footer>© 2025 STAR CHITS. All rights reserved.</footer>
+  <script src="script.js"></script>
+</body>
+</html>
