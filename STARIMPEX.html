@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>⭐ STAR CHITS</title>
+        <style>
+            body{font-family:Arial,sans-serif;margin:0;background:#f7f9fc;min-height:100vh;display:flex;flex-direction:column;}
+            header{background:#083b7c;color:#cfe2ff;text-align:center;}
+            nav{background:#e8f1ff;display:flex;flex-wrap:wrap;justify-content:center;gap:5px;padding:5px;}
+            nav button{background:#083b7c;color:#cfe2ff;border:none;padding:10px 18px;border-radius:6px;cursor:pointer;font-weight:bold;display:none;}
+            nav button.active{background:#9be7b1;color:#0b5a2a;}
+            section{display:none;padding:25px;max-width:1200px;margin:auto;background:#fff;border-radius:10px;}
+            h2{text-align:center;color:#f13708}
+            .center-text{text-align:center}
+            table{width:100%;border-collapse:collapse;margin-top:15px;font-size:14px;}
+            th,td{border:1px solid #d6e4ff;padding:8px;text-align:center;}
+            th{background:#eef4ff}
+            .total-row{background:#dff3ff;font-weight:bold;}
+            .btn-blue{background:#083b7c;color:#cfe2ff;border:none;padding:8px 14px;border-radius:5px;cursor:pointer;font-weight:bold;}
+            .btn-red{background:#ffb3b3;color:#7a0000;border:none;padding:8px 14px;border-radius:5px;cursor:pointer;}
+            .details-container{background:#fff;padding:15px;border-radius:10px;position:relative;overflow-x:auto;}
+            .top-right{position:absolute;top:10px;right:10px;}
+            footer{background:#083b7c;color:#cfe2ff;text-align:center;padding:1px;margin-top:auto;}
+        </style>
+    </head>
+    <body>
+        <header><h1>⭐ STAR CHITS</h1></header>
+        <nav>
+            <button id="homeBtn" onclick="showPage('home',this)">Home</button>
+            <button id="MonthlyPaymentsBtn" onclick="showPage('MonthlyPayments',this)">Monthly Payments</button>
+            <button id="depositsBtn" onclick="showPage('deposits',this)">Deposits</button>
+            <button id="CollectionsBtn" onclick="showPage('Collections',this)">Collections</button>
+            <button id="loansBtn" onclick="showPage('loans',this)">Loans</button>
+            <button id="penaltiesBtn" onclick="showPage('penalties',this)">Penalties</button>
+            <button id="logoutBtn" class="btn-red" onclick="logout()">Logout</button>
+        </nav>
+        <section id="home" class="center-text">
+            <h2 id="homeMsg">Welcome</h2>
+            <div id="homeLoginButtons">
+                <button class="btn-blue" onclick="showPage('clientLogin')">Client Login</button><br><br>
+                <button class="btn-blue" onclick="showPage('adminLogin')">Admin Login</button>
+            </div>
+        </section>
+        <section id="clientLogin" class="center-text">
+            <h2>Client Login</h2>
+            <select id="loginUser">
+            <option value="Standard Traders">Standard Traders</option>
+            <option value="S SHIVA AROGYA MILK">S SHIVA AROGYA MILK</option>
+            </select><br><br>
+            <input type="password" id="pin" placeholder="Enter PIN"><br><br>
+            <button class="btn-blue" onclick="clientLogin()">Login</button>
+            <p id="loginMsg"></p>
+        </section>
+        <section id="adminLogin" class="center-text">
+            <h2>Admin Login</h2>
+            <input type="text" id="adminUser" placeholder="Username"><br><br>
+            <input type="password" id="adminPin" placeholder="PIN"><br><br>
+            <button class="btn-blue" onclick="adminLogin()">Login</button>
+            <p id="adminMsg"></p>
+        </section>
+        <section id="MonthlyPayments">
+            <div class="details-container">
+                <button class="btn-red top-right" onclick="showPage('home',homeBtn)">⬅ Back</button>
+                <div class="center-text">
+                    <select id="monthFilter" onchange="filterByMonth()">
+                    <option value="">All Months</option>
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                    </select>
+                    <br><br>
+                    <input type="text" id="MonthlyPaymentsSearch" placeholder="Search Client..." onkeyup="searchMonthlyPaymentsCollections()">
+                </div>
+                <button onclick="sortMonthlyPayments()">Sort By Date</button>
+                <table id="MonthlyPaymentsTable">
+                    <tr>
+                        <th>S.NO.</th>
+                        <th>DATE</th>
+                        <th>NAME</th>
+                        <th>AMOUNT</th>
+                        <th>CONTACT NUMBER</th>
+                        <th>PAYMENT TYPE</th>
+                        <th>ACCOUNT ID</th>
+                        <td>INSTALLMENT NUMBER</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>18/02/2026</td>
+                        <td>S SHIVA AROGYA MILK</td>
+                        <td class="MonthlyPaymentsAmount">89000</td>
+                        <td>9849419693</td>
+                        <td>STOCK GARDEN</td>
+                        <td>AP25C10C3</td>
+                        <td>12/20</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>18/02/2026</td>
+                        <td>FAST LOGISTICS</td>
+                        <td class="MonthlyPaymentsAmount">80000</td>
+                        <td>8019279506</td>
+                        <td>STOCK GARDEN</td>
+                        <td>MA26C1P19</td>
+                        <td>1/20</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>18/02/2026</td>
+                        <td>BUJJI GANDHINAGAR</td>
+                        <td class="MonthlyPaymentsAmount">60000</td>
+                        <td>9866320198</td>
+                        <td>DLN</td>
+                        <td>SE25EMC</td>
+                        <td>6/32</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>18/02/2026</td>
+                        <td>MAMATHA SAMMAIH</td>
+                        <td class="MonthlyPaymentsAmount">50000</td>
+                        <td>9393936608</td>
+                        <td>STOCK GARDEN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>18/02/2026</td>
+                        <td>LINGAM MEDCHAL</td>
+                        <td class="MonthlyPaymentsAmount">25000</td>
+                        <td>9959548509</td>
+                        <td>STOCK GARDEN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>18/02/2026</td>
+                        <td>K K VISHNU</td>
+                        <td class="MonthlyPaymentsAmount">88500</td>
+                        <td>9849365657</td>
+                        <td>STOCK GARDEN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>19/02/2026</td>
+                        <td>V RAMANA CHARLAPALLY</td>
+                        <td class="MonthlyPaymentsAmount">43250</td>
+                        <td>9652696819</td>
+                        <td>STOCK GARDEN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>19/02/2026</td>
+                        <td>MAMATHA SAMMAIH</td>
+                        <td class="MonthlyPaymentsAmount">136000</td>
+                        <td>9393936608</td>
+                        <td>STOCK GARDEN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>20/02/2026</td>
+                        <td>FAST LOGISTICS</td>
+                        <td class="MonthlyPaymentsAmount">30000</td>
+                        <td>8019279506</td>
+                        <td>STOCK GARDEN</td>
+                        <td>MA26C1P19</td>
+                        <td>1/20</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>20/02/2026</td>
+                        <td>PANDU MOOSAPET</td>
+                        <td class="MonthlyPaymentsAmount">50000</td>
+                        <td>9849796004</td>
+                        <td>DLN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>20/02/2026</td>
+                        <td>PANDU MOOSAPET</td>
+                        <td class="MonthlyPaymentsAmount">50000</td>
+                        <td>9849796004</td>
+                        <td>DLN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>20/02/2026</td>
+                        <td>S SHIVA AROGYA MILK</td>
+                        <td class="MonthlyPaymentsAmount">64750</td>
+                        <td>9849419693</td>
+                        <td>CASH</td>
+                        <td>AP25C10C3</td>
+                        <td>12/20</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>20/02/2026</td>
+                        <td>KINGIRI SHANKAR</td>
+                        <td class="MonthlyPaymentsAmount">20000</td>
+                        <td>9989253547</td>
+                        <td>DLN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>21/02/2026</td>
+                        <td>BUJJI GANDHINAGAR</td>
+                        <td class="MonthlyPaymentsAmount">20000</td>
+                        <td>9866320198</td>
+                        <td>DLN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>21/02/2026</td>
+                        <td>RAMESH KATEDAN</td>
+                        <td class="MonthlyPaymentsAmount">100000</td>
+                        <td>9849164173</td>
+                        <td>MATERIAL ADJUSTMENT</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>23/02/2026</td>
+                        <td>NARASIMHA SAI REDDY</td>
+                        <td class="MonthlyPaymentsAmount">355000</td>
+                        <td>9951412131</td>
+                        <td>DLN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>23/02/2026</td>
+                        <td>P SHIVA KUMAR</td>
+                        <td class="MonthlyPaymentsAmount">22900</td>
+                        <td>8639710945</td>
+                        <td>DLN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>23/02/2026</td>
+                        <td>PUNARAM</td>
+                        <td class="MonthlyPaymentsAmount">22500</td>
+                        <td>9840883148</td>
+                        <td>STOCK GARDEN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>23/02/2026</td>
+                        <td>ASHOK YELLAMMABANDA</td>
+                        <td class="MonthlyPaymentsAmount">70000</td>
+                        <td>7386456262</td>
+                        <td>DLN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>24/02/2026</td>
+                        <td>G SHIVA KUMAR</td>
+                        <td class="MonthlyPaymentsAmount">238397</td>
+                        <td>9866273378</td>
+                        <td>MATERIAL ADJUSTMENT</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>24/02/2026</td>
+                        <td>G ANIL KUMAR</td>
+                        <td class="MonthlyPaymentsAmount">127920</td>
+                        <td>9866273378</td>
+                        <td>MATERIAL ADJUSTMENT</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>24/02/2026</td>
+                        <td>ASHOK YELLAMMABANDA</td>
+                        <td class="MonthlyPaymentsAmount">6000</td>
+                        <td>7386456262</td>
+                        <td>DLN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>25/02/2026</td>
+                        <td>KINGIRI KRISHNA</td>
+                        <td class="MonthlyPaymentsAmount">3000</td>
+                        <td>9963140023</td>
+                        <td>DLN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>26/02/2026</td>
+                        <td>RAJU YELLAMMABANDA</td>
+                        <td class="MonthlyPaymentsAmount">47856</td>
+                        <td>9701400284</td>
+                        <td>DLN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>27/02/2026</td>
+                        <td>PANDU MOOSAPET</td>
+                        <td class="MonthlyPaymentsAmount">20000</td>
+                        <td>9849796004</td>
+                        <td>DLN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>27/02/2026</td>
+                        <td>BANDLA SHAILAJA</td>
+                        <td class="MonthlyPaymentsAmount">12334</td>
+                        <td>6301912787</td>
+                        <td>DLN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>27/02/2026</td>
+                        <td>KINGIRI KRISHNA</td>
+                        <td class="MonthlyPaymentsAmount">40000</td>
+                        <td>9963140023</td>
+                        <td>DLN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>28/02/2026</td>
+                        <td>KINGIRI KRISHNA</td>
+                        <td class="MonthlyPaymentsAmount">30000</td>
+                        <td>9963140023</td>
+                        <td>DLN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>28/02/2026</td>
+                        <td>KINGIRI KRISHNA</td>
+                        <td class="MonthlyPaymentsAmount">40000</td>
+                        <td>9963140023</td>
+                        <td>DLN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>28/02/2026</td>
+                        <td>P SHIVA KUMAR</td>
+                        <td class="MonthlyPaymentsAmount">60</td>
+                        <td>8639710945</td>
+                        <td>DLN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>01/03/2026</td>
+                        <td>V RAMANA CHARLAPALLY</td>
+                        <td class="MonthlyPaymentsAmount">53560</td>
+                        <td>9652696819</td>
+                        <td>STOCK GARDEN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>01/03/2026</td>
+                        <td>PUNARAM</td>
+                        <td class="MonthlyPaymentsAmount">7818</td>
+                        <td>9840883148</td>
+                        <td>STOCK GARDEN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>03/03/2026</td>
+                        <td>BUJJI GANDHINAGAR</td>
+                        <td class="MonthlyPaymentsAmount">105637</td>
+                        <td>9866320198</td>
+                        <td>DLN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>01/03/2026</td>
+                        <td>VENUGOPAL MALLAMPET</td>
+                        <td class="MonthlyPaymentsAmount">120000</td>
+                        <td>9908014384</td>
+                        <td>MATERIAL ADJUSTMENT</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>06/03/2026</td>
+                        <td>MALLESH MIYAPUR</td>
+                        <td class="MonthlyPaymentsAmount">14002</td>
+                        <td>8978634889</td>
+                        <td>STOCK GARDEN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>07/03/2026</td>
+                        <td>NARASIMHA SAI REDDY</td>
+                        <td class="MonthlyPaymentsAmount">44250</td>
+                        <td>9951412131</td>
+                        <td>STOCK GARDEN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>07/03/2026</td>
+                        <td>BUJJI GANDHINAGAR</td>
+                        <td class="MonthlyPaymentsAmount">94000</td>
+                        <td>9866320198</td>
+                        <td>CASH</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>09/03/2026</td>
+                        <td>K K SAIRAM</td>
+                        <td class="MonthlyPaymentsAmount">88500</td>
+                        <td>9849682938</td>
+                        <td>CASH</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>09/03/2026</td>
+                        <td>K K SAIRAM</td>
+                        <td class="MonthlyPaymentsAmount">90000</td>
+                        <td>9849682938</td>
+                        <td>CASH</td>
+                    </tr> 
+                    <tr>
+                        <td></td>
+                        <td>09/03/2026</td>
+                        <td>V RAMANA CHARLAPALLY</td>
+                        <td class="MonthlyPaymentsAmount">63230</td>
+                        <td>9652696819</td>
+                        <td>STOCK GARDEN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>10/03/2026</td>
+                        <td>ASHOK YELLAMMABANDA</td>
+                        <td class="MonthlyPaymentsAmount">51745</td>
+                        <td>7386456262</td>
+                        <td>DLN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>10/03/2026</td>
+                        <td>V RAMANA CHARLAPALLY</td>
+                        <td class="MonthlyPaymentsAmount">87747</td>
+                        <td>9652696819</td>
+                        <td>STOCK GARDEN</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>10/03/2026</td>
+                        <td>RAMA KRISHNA</td>
+                        <td class="MonthlyPaymentsAmount">6012</td>
+                        <td>6309180059</td>
+                        <td>SALARY ADJUSTMENT</td>
+                    </tr>
+                    <tr class="total-row">
+                    <td colspan="3">TOTAL</td>
+                    <td id="MonthlyPaymentsTotal"></td>
+                    <td> </td>
+                    <td> </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <section id="Collections">
+            <div class="center-text">
+                <button class="btn-blue" onclick="showPage('loanCollections')">LOAN COLLECTIONS</button>
+                <br><br>
+                <button class="btn-blue" onclick="showPage('depositCollections')">DEPOSIT COLLECTIONS</button>
+            </div>
+        </section>
+        <section id="depositCollections">
+            <div class="details-container">
+                <button class="btn-red top-right" onclick="showPage('Collections',CollectionsBtn)">⬅ Back</button>
+                <h2>Deposit Collections</h2>
+                <div class="center-text">
+                    <input type="text" id="Collectionsearch" placeholder="Search Client..." onkeyup="searchCollections()">
+                </div>
+                <button onclick="exportTableToExcel('depositPaymentTable','Deposit_Collections')">Export to Excel</button>
+                <table id="depositPaymentTable">
+                    <tr>
+                        <th>S.NO.</th>
+                        <th>DATE</th>
+                        <th>NAME</th>
+                        <th>AMOUNT</th>
+                        <th>CONTACT NUMBER</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>20/02/2026</td>
+                        <td>PANDU MOOSAPET</td>
+                        <td class="amount">100000</td>
+                        <td>9849796004</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="3">TOTAL</td>
+                        <td id="totalCollections"></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <section id="loanCollections">
+            <div class="details-container">
+                <button class="btn-red top-right" onclick="showPage('Collections',CollectionsBtn)">⬅ Back</button>
+                <h2>Loan Collections</h2>
+                <div class="center-text">
+                    <input type="text" id="loanCollectionsearch" placeholder="Search Client..." onkeyup="searchLoanCollections()">
+                </div>
+                <button onclick="exportTableToExcel('loanPaymentTable','Loan_Collections')">Export to Excel</button>
+                <table id="loanPaymentTable">
+                    <tr>
+                        <th>S.NO.</th>
+                        <th>DATE</th>
+                        <th>NAME</th>
+                        <th>AMOUNT</th>
+                        <th>CONTACT NUMBER</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>02/02/2026</td>
+                        <td>VENUGOPAL MALLAMPET</td>
+                        <td class="loanAmount">120000</td>
+                        <td>9908014384</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="3">TOTAL</td>
+                        <td id="loanTotalCollections"></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <section id="penalties"><h2>Penalties</h2></section>
+        <section id="deposits">
+            <div id="deposit-list" class="center-text"></div>
+            <div id="reference-page" style="display:none" class="center-text">
+                <h3 id="refTitle"></h3>
+                <button class="btn-blue" onclick="openDetails()"><span id="refNumber"></span></button><br><br>                <button class="btn-red" onclick="backToList()">⬅ Back</button>
+            </div>
+            <div id="details-page" style="display:none">
+                <div class="details-container">
+                    <button class="btn-red top-right" onclick="backToReference()">⬅</button>
+                    <h2>Depositor Details</h2>
+                    <table id="detailsTable"></table>
+                    <table id="depositTable"></table>
+                </div>
+            </div>
+        </section>
+        <section id="loans">
+            <div id="loan-list" class="center-text"></div>
+            <div id="loan-ref" style="display:none" class="center-text">
+                <h3 id="loanRefTitle"></h3>
+                <button class="btn-blue" onclick="openLoanDetails()"><span id="loanRefNumber"></span></button><br><br>
+                <button class="btn-red" onclick="backToLoanList()">⬅ Back</button>
+            </div>
+            <div id="loan-details" style="display:none">
+                <div class="details-container">
+                    <button class="btn-red top-right" onclick="backToLoanRef()">⬅</button>
+                    <div id="loanContent"></div>
+                </div>
+            </div>
+        </section>
+        <footer>Contact: 99xxxxxxxx Email: starimpex2025@gmail.com</footer>
+        <script>
+            let role=null;
+            let currentDepositor="";
+            const pins={"Standard Traders":"1234","S SHIVA AROGYA MILK":"1234"};
+            const adminCred={user:"star",pin:"1234"};
+            const fixedDeposits={
+                "Standard Traders":100000,
+                "S SHIVA AROGYA MILK":null,
+                "PANDU MOOSAPET":100000,
+                "MALLESH MIYAPUR":25000,
+                "RAMESH KATEDAN":100000,
+                "NARASIMHA SAI REDDY":25000,
+                "NARASIMHA SAIREDDY":19000,
+                "T.RAMA KOTESWARARAO":25000,
+                "LINGAM MEDCHAL":100000
+            };
+            const shivaArogyaMilkDeposits = [
+                37500,37500,38000,38500,39000,39500,40250,41000,41750,42500,
+                43250,44000,44750,45500,46250,47000,47750,48500,49250,50000
+            ];
+            const amt=n=>Number(n).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+            function showPage(id,btn){
+                document.querySelectorAll("section").forEach(s=>s.style.display="none");
+                document.getElementById(id).style.display="block";
+                document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+                if(btn) btn.classList.add("active");
+                if(id==="deposits") loadDepositList();
+                if(id==="loans") loadLoanList();
+                updateMonthlyPaymentsNumbers();
+                updatePaymentNumbers();
+                updateLoanPaymentNumbers();
+            }
+            function setupMenu(){
+                ["homeBtn","MonthlyPaymentsBtn","depositsBtn","CollectionsBtn","loansBtn","penaltiesBtn","logoutBtn"]
+                .forEach(id=>document.getElementById(id).style.display="inline-block");
+                document.getElementById("homeLoginButtons").style.display="none";
+                homeMsg.innerText="✅ Login Successful";
+            }
+            function clientLogin(){
+                if(pin.value===pins[loginUser.value]){
+                role="client";
+                currentDepositor=loginUser.value;
+                setupMenu();
+                showPage("home",homeBtn);
+                }else loginMsg.innerText="Invalid PIN";
+            }
+            function adminLogin(){
+                if(adminUser.value===adminCred.user && adminPin.value===adminCred.pin){
+                role="admin";
+                setupMenu();
+                showPage("home",homeBtn);
+                }else adminMsg.innerText="Invalid credentials";
+            }
+            function logout(){
+                role=null;currentDepositor="";
+                document.querySelectorAll("nav button").forEach(b=>b.style.display="none");
+                homeBtn.style.display="inline-block";
+                homeMsg.innerText="Welcome";
+                document.getElementById("homeLoginButtons").style.display="block";
+                showPage("home",homeBtn);
+            }
+            const depositList=document.getElementById("deposit-list");
+            const referencePage=document.getElementById("reference-page");
+            const detailsPage=document.getElementById("details-page");
+            function loadDepositList(){
+                let html="";
+                for(let name in fixedDeposits){
+                    if(role==="admin"||currentDepositor===name)
+                    html+=`<p><b>${name}</b> —
+                    <button class="btn-blue" onclick="selectDepositor('${name}')">View</button></p>`;
+                }
+                depositList.innerHTML=html;
+                depositList.style.display="block";
+                referencePage.style.display="none";
+                detailsPage.style.display="none";
+            }
+            function selectDepositor(type){
+                currentDepositor=type;
+                depositList.style.display="none";
+                referencePage.style.display="block";
+                refTitle.innerText=type;
+                if(type==="Standard Traders") refNumber.innerText="JL24C20-6";
+                else if(type==="S SHIVA AROGYA MILK") refNumber.innerText="AP25C10-3";
+                else refNumber.innerText="REF-001";
+            }
+            function backToList(){referencePage.style.display="none";depositList.style.display="block";}
+            function backToReference(){detailsPage.style.display="none";referencePage.style.display="block";}
+            function openDetails(){
+                referencePage.style.display="none";
+                detailsPage.style.display="block";
+                generateDetails();
+                generateDepositTable();
+            }
+            function generateDetails(){
+                let name="", startDate="", tenure="20 MONTHS", interest="", chitValue="";
+                if(currentDepositor==="Standard Traders"){
+                    name="STANDARD TRADERS";
+                    startDate="JULY-2024";
+                    interest="1.00%";
+                    chitValue="2000000";
+                }
+                else if(currentDepositor==="S SHIVA AROGYA MILK"){
+                    name="S SHIVA AROGYA MILK";
+                    startDate="APRIL-2025";
+                    interest="1.14265%";
+                    chitValue="1000000";
+                }
+                else{
+                    name=currentDepositor;
+                    startDate="--";
+                    interest="1.00%";
+                    chitValue="--";
+                }
+                detailsTable.innerHTML=`
+                <tr><th>NAME</th><td>${name}</td></tr>
+                <tr><th>START DATE</th><td>${startDate}</td></tr>
+                <tr><th>TENURE</th><td>${tenure}</td></tr>
+                <tr><th>INTEREST</th><td>${interest}</td></tr>
+                <tr><th>CHIT VALUE</th><td>${chitValue}</td></tr>
+                `;
+            }
+            function generateDepositTable(){
+                const months=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+                let startMonth=currentDepositor==="Standard Traders"?6:3;
+                let startYear=currentDepositor==="Standard Traders"?2024:2025;
+                let rate=currentDepositor==="S SHIVA AROGYA MILK"?0.0114265:0.01;
+                let oldDep=0, oldInt=0;
+                depositTable.innerHTML=`<tr>
+                <th>S.No</th><th>MONTH</th><th>DEPOSIT</th><th>OLD BAL</th>
+                <th>TOTAL DEP</th><th>INT</th><th>OLD INT</th>
+                <th>TOTAL INT</th><th>GRAND TOTAL</th></tr>`;
+                for(let i=0;i<20;i++){
+                    let dep = currentDepositor === "S SHIVA AROGYA MILK"? (shivaArogyaMilkDeposits[i] || 0) : (fixedDeposits[currentDepositor] || 0);
+                    let m=(startMonth+i)%12;
+                    let y=startYear+Math.floor((startMonth+i)/12);
+                    let int=+(oldDep*rate).toFixed(2);
+                    let tDep=oldDep+dep;
+                    let tInt=oldInt+int;
+                    depositTable.innerHTML+=`
+                    <tr>
+                    <td>${i+1}</td>
+                    <td>${months[m]}-${y}</td>
+                    <td>${amt(dep)}</td>
+                    <td>${amt(oldDep)}</td>
+                    <td>${amt(tDep)}</td>
+                    <td>${amt(int)}</td>
+                    <td>${amt(oldInt)}</td>
+                    <td>${amt(tInt)}</td>
+                    <td>${amt(tDep+tInt)}</td>
+                    </tr>`;
+                    oldDep=tDep;
+                    oldInt=tInt;
+                }
+                depositTable.innerHTML+=`
+                <tr class="total-row">
+                <td colspan="4">FINAL TOTAL</td>
+                <td>${amt(oldDep)}</td>
+                <td colspan="2"></td>
+                <td>${amt(oldInt)}</td>
+                <td>${amt(oldDep+oldInt)}</td>
+                </tr>`;
+            }
+            const loanList=document.getElementById("loan-list");
+            const loanRef=document.getElementById("loan-ref");
+            const loanDetails=document.getElementById("loan-details");
+            const loanContent=document.getElementById("loanContent");
+            function loadLoanList(){
+                let html="";
+                ["Standard Traders","S SHIVA AROGYA MILK"].forEach(name=>{
+                    if(role==="admin"||currentDepositor===name)
+                    html+=`<p><b>${name}</b> —
+                    <button class="btn-blue" onclick="selectLoan('${name}')">View</button></p>`;
+                });
+                loanList.innerHTML=html;
+                loanList.style.display="block";
+                loanRef.style.display="none";
+                loanDetails.style.display="none";
+            }
+            function selectLoan(type){
+                currentDepositor=type;
+                loanList.style.display="none";
+                loanRef.style.display="block";
+                loanRefTitle.innerText=type;
+                loanRefNumber.innerText=type==="Standard Traders"?"JL24C20-6":"AP25C10-3";
+            }
+            function backToLoanList(){loanRef.style.display="none";loanList.style.display="block";}
+            function backToLoanRef(){loanDetails.style.display="none";loanRef.style.display="block";}
+            function openLoanDetails(){
+                loanRef.style.display="none";
+                loanDetails.style.display="block";
+                loadLoansPage();
+            }
+            function loadLoansPage(){
+                const allDeposits=currentDepositor==="Standard Traders"
+                ?Array(20).fill(100000):shivaArogyaMilkDeposits.slice();
+                const deposits=allDeposits.slice(0,5);
+                const months=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+                let startMonth=currentDepositor==="Standard Traders"?6:3;
+                let startYear=currentDepositor==="Standard Traders"?2024:2025;
+                let totalDep=0, depRows="";
+                deposits.forEach((d,i)=>{
+                    totalDep+=d;
+                    let m=(startMonth+i)%12;
+                    let y=startYear+Math.floor((startMonth+i)/12);
+                    depRows+=`<tr><td>${i+1}</td><td>${months[m]}-${y}</td><td>${amt(d)}</td><td>${amt(totalDep)}</td></tr>`;
+                });
+                const prizedAmount=730000;
+                const loanROI=0.02833;
+                const tenure=15;
+                let balance=prizedAmount-totalDep;
+                let loanRows="";
+                let totalLoanAmount=0;
+                let totalInterestAmount=0;
+                for(let i=0;i<tenure;i++){
+                    let sn=i+6;
+                    let m=(startMonth+5+i)%12;
+                    let y=startYear+Math.floor((startMonth+5+i)/12);
+                    let interest=balance*loanROI;
+                    let total=balance+interest;
+                    let received=allDeposits[i+5]||0;
+                    let newBalance=total-received;
+                    totalLoanAmount+=balance;
+                    totalInterestAmount+=interest;
+                    loanRows+=`<tr>
+                    <td>${sn}</td><td>${months[m]}-${y}</td>
+                    <td>${amt(balance)}</td><td>${amt(interest)}</td>
+                    <td>${amt(total)}</td><td>${amt(received)}</td>
+                    <td>${amt(newBalance)}</td></tr>`;
+                    balance=newBalance;
+                }
+                loanRows+=`
+                <tr class="total-row">
+                <td colspan="2">FINAL TOTAL</td>
+                <td>${amt(totalLoanAmount)}</td>
+                <td>${amt(totalInterestAmount)}</td>
+                <td>${amt(totalLoanAmount+totalInterestAmount)}</td>
+                <td colspan="2"></td>
+                </tr>`;
+                loanContent.innerHTML=`
+                <table><tr><th>S.No</th><th>Month</th><th>Deposit</th><th>Total Deposit</th></tr>
+                ${depRows}
+                <tr class="total-row"><td colspan="3">TOTAL</td><td>${amt(totalDep)}</td></tr></table>
+                <h3 style="text-align:center;color:#083b7c">PRIZED CHIT DETAILS</h3>
+                <table>
+                <tr><th>Prized Amount</th><td>${amt(prizedAmount)}</td></tr>
+                <tr><th>Deposited</th><td>${amt(totalDep)}</td></tr>
+                <tr><th>Loan Amount</th><td>${amt(prizedAmount-totalDep)}</td></tr>
+                <tr><th>Monthly ROI</th><td>2.833%</td></tr>
+                <tr><th>Tenure</th><td>15 Months</td></tr>
+                </table>
+                <h3 style="text-align:center;color:#f13708">LOAN SCHEDULE</h3>
+                <table>
+                <tr><th>S.No</th><th>Month</th><th>Loan</th><th>Interest</th>
+                <th>Total</th><th>Received</th><th>Balance</th></tr>
+                ${loanRows}</table>`;
+            }
+            function addPayment(){
+                let client=document.getElementById("payClient").value;
+                let amount=document.getElementById("payAmount").value;
+                let date=document.getElementById("payDate").value;
+                if(!client || !amount || !date) return;
+                let table=document.getElementById("paymentTable");
+                table.innerHTML+=`
+                <tr>
+                <td>${client}</td>
+                <td>${Number(amount).toLocaleString()}</td>
+                <td>${date}</td>
+                </tr>`;
+                document.getElementById("payClient").value="";
+                document.getElementById("payAmount").value="";
+                document.getElementById("payDate").value="";
+            }
+            function updatePaymentNumbers(){
+                let table=document.getElementById("depositPaymentTable");
+                let rows=table.rows;
+                let count=1;
+                let total=0;
+                for(let i=1;i<rows.length-1;i++){
+                    rows[i].cells[0].innerText=count++;
+                    let cell=rows[i].querySelector(".amount");
+                    if(!cell) continue;
+                    let amt=parseFloat(cell.innerText.replace(/,/g,''))||0;
+                    total+=amt;
+                    rows[i].querySelector(".amount").innerText=
+                    Number(amt).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+                }
+                document.getElementById("totalCollections").innerText=
+                Number(total).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+                saveDepositCollections();
+            }
+            function searchCollections(){
+                let input=document.getElementById("Collectionsearch").value.toUpperCase();
+                let table=document.getElementById("depositPaymentTable");
+                let rows=table.getElementsByTagName("tr");
+                for(let i=1;i<rows.length;i++){
+                    if(rows[i].classList.contains("total-row")) continue;
+                    let name=rows[i].cells[2].innerText.toUpperCase();
+                    rows[i].style.display=name.includes(input)?"":"none";
+                }
+            }
+            window.addEventListener("load",updatePaymentNumbers);
+            function updateLoanPaymentNumbers(){
+                let table=document.getElementById("loanPaymentTable");
+                let rows=table.rows;
+                let count=1;
+                let total=0;
+                for(let i=1;i<rows.length-1;i++){
+                    rows[i].cells[0].innerText=count++;
+                    let cell=rows[i].querySelector(".loanAmount");
+                    if(!cell) continue;
+                    let amt=parseFloat(cell.innerText.replace(/,/g,''))||0;
+                    total+=amt;
+                    rows[i].querySelector(".loanAmount").innerText=
+                    Number(amt).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+                }
+                document.getElementById("loanTotalCollections").innerText=
+                Number(total).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+            }
+            function searchLoanCollections(){
+                let input=document.getElementById("loanCollectionsearch").value.toUpperCase();
+                let table=document.getElementById("loanPaymentTable");
+                let rows=table.getElementsByTagName("tr");
+                for(let i=1;i<rows.length;i++){
+                    if(rows[i].classList.contains("total-row")) continue;
+                    let name=rows[i].cells[2].innerText.toUpperCase();
+                    rows[i].style.display=name.includes(input)?"":"none";
+                }
+            }
+            window.addEventListener("load",updateLoanPaymentNumbers);
+            function updateMonthlyPaymentsNumbers(){
+                let table=document.getElementById("MonthlyPaymentsTable");
+                let rows=table.rows;
+                let count=1;
+                let total=0;
+                for(let i=1;i<rows.length-1;i++){
+                    rows[i].cells[0].innerText=count++;
+                    let cell=rows[i].querySelector(".MonthlyPaymentsAmount");
+                    if(!cell) continue;
+                    let amt=parseFloat(cell.innerText.replace(/,/g,''))||0;
+                    total+=amt;
+                    rows[i].querySelector(".MonthlyPaymentsAmount").innerText=
+                    Number(amt).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+                }
+                document.getElementById("MonthlyPaymentsTotal").innerText=
+                Number(total).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+            }
+            function searchMonthlyPaymentsCollections(){
+                let input=document.getElementById("MonthlyPaymentsSearch").value.toUpperCase();
+                let table=document.getElementById("MonthlyPaymentsTable");
+                let rows=table.getElementsByTagName("tr");
+                for(let i=1;i<rows.length;i++){
+                    if(rows[i].classList.contains("total-row")) continue;
+                    let name=rows[i].cells[2].innerText.toUpperCase();
+                    rows[i].style.display=name.includes(input)?"":"none";
+                }
+            }
+            function saveDepositCollections(){
+                let rows=document.querySelectorAll("#depositPaymentTable tr");
+                let data=[];
+                rows.forEach((row,i)=>{
+                    if(i===0 || row.classList.contains("total-row")) return;
+                    let cols=row.querySelectorAll("td");
+                    data.push({
+                        date:cols[1].innerText,
+                        name:cols[2].innerText,
+                        amount:cols[3].innerText,
+                        phone:cols[4].innerText
+                    });
+                });
+                localStorage.setItem("depositCollections",JSON.stringify(data));
+            }
+            function loadDepositCollections(){
+                let data=JSON.parse(localStorage.getItem("depositCollections")) || [];
+                let table=document.getElementById("depositPaymentTable");
+                let rows=table.rows;
+                rows.forEach((row,i)=>{
+                    if(i!==0 && !row.classList.contains("total-row")) row.remove();
+                });
+                data.forEach(item=>{
+                    let row=document.createElement("tr");
+                    row.innerHTML=`
+                    <td></td>
+                    <td>${item.date}</td>
+                    <td>${item.name}</td>
+                    <td class="amount">${item.amount}</td>
+                    <td>${item.phone}</td>
+                    `;
+                    table.insertBefore(row,table.querySelector(".total-row"));
+                });
+                updatePaymentNumbers();
+            }
+            function exportTableToExcel(tableID, filename=''){ 
+                var table = document.getElementById(tableID);
+                var html = table.outerHTML;
+                filename = filename ? filename+'.xls' : 'excel_data.xls';
+                var dataType = 'application/vnd.ms-excel';
+                var link = document.createElement("a");
+                document.body.appendChild(link);
+                var blob = new Blob(['\ufeff', html], {type: dataType});
+                var url = URL.createObjectURL(blob);
+                link.href = url;
+                link.download = filename;
+                link.click();
+                document.body.removeChild(link);
+            }
+            window.addEventListener("load",function(){
+                document.getElementById("homeBtn").style.display="inline-block";
+                showPage("home",document.getElementById("homeBtn"));
+                updatePaymentNumbers();
+                updateLoanPaymentNumbers();
+                updateMonthlyPaymentsNumbers();
+                loadDepositCollections();
+            });
+            function filterByMonth(){
+                let month=document.getElementById("monthFilter").value;
+                let table=document.getElementById("MonthlyPaymentsTable");
+                let rows=table.getElementsByTagName("tr");
+                let total=0;
+                for(let i=1;i<rows.length;i++){
+                    if(rows[i].classList.contains("total-row")) continue;
+                    let date=rows[i].cells[1].innerText;
+                    let rowMonth=date.split("/")[1];
+                    if(month=="" || rowMonth==month){
+                        rows[i].style.display="";
+                        let cell=rows[i].querySelector(".MonthlyPaymentsAmount");
+                        let amt=parseFloat(cell.innerText.replace(/,/g,''))||0;
+                        total+=amt;
+                    }
+                    else{
+                        rows[i].style.display="none";
+                    }
+                }
+                document.getElementById("MonthlyPaymentsTotal").innerText=
+                Number(total).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+            }
+            function sortMonthlyPayments(){
+                let table=document.getElementById("MonthlyPaymentsTable");
+                let rows=Array.from(table.rows).slice(1); // skip header
+                rows.sort(function(a,b){
+                    let dateA=a.cells[1].innerText.split("/");
+                    let dateB=b.cells[1].innerText.split("/");
+                    let dA=new Date(dateA[2],dateA[1]-1,dateA[0]);
+                    let dB=new Date(dateB[2],dateB[1]-1,dateB[0]);
+                    return dA-dB;
+                });
+                for(let row of rows){
+                    table.appendChild(row);
+                }
+                updateMonthlyPaymentsNumbers();
+            }
+        </script>
+    </body>
+</html>
